@@ -38,5 +38,7 @@ main {
   flex-direction: column;
   margin-top: 100px;
   max-width: 1200px;
+  max-height: 80vh;
+  overflow-x: auto;
   flex-grow: 1;
 }

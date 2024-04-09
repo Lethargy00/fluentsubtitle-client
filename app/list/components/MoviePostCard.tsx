@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 // Define the structure of a movie object with its properties
 interface Movie {
@@ -65,7 +66,7 @@ const MovieDetails: React.FC<{ movieId: string }> = ({ movieId }) => {
         <img src={imageUrl} alt={movie.title} />
         <div>
             <div className={styles.movieTitle}>
-                <a href=""><h2>{movie.title} ({releaseYear})</h2></a>
+                <Link href={`/list/${movieId}`} key={movieId}><h2>{movie.title} ({releaseYear})</h2></Link>
                 <h2>{movie.vote_average} / 10 <FontAwesomeIcon icon={faStar} className={styles.star}/> <FontAwesomeIcon icon={faHeart} className={styles.heart}/></h2>
             </div>
             <p>{movie.overview}</p>

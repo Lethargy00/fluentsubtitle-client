@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <header className='ml-2'>
-          <Link className="ml-5 text-3xl flex items-center hover:text-purple-500" href="./">
+          <Link className="ml-5 text-3xl flex items-center hover:text-purple-500" href="/">
             <Image 
               src='/favicon.ico'
               width={80}
