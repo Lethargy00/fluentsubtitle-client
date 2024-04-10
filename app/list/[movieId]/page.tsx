@@ -1,12 +1,20 @@
+"use client"
+import React, { useEffect, useState } from 'react';
+import SubtitleList from './components/SubtitleList';
+import MovieDetails from "../components/MoviePostCard";
+
 export default function MovieDetailsPage({ 
   params,
  }: {
   params: { movieId: string};
  }){
 
+  const movieId = params.movieId;
+
   return (
-    <main>
-      <h1>dmwaomwdo {params.movieId}</h1>
-    </main>
+  <main>
+    <MovieDetails movieId={movieId}/>
+    <SubtitleList/>
+  </main>
   );
 }

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SearchBar from "./components/SearchBar";
 import Link from "next/link";
+import SignUpButton from "./components/SignUpButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,8 @@ export default function RootLayout({
             />
             FluentSubtitle
           </Link>
-          <SearchBar/>
+          <SearchBar/>          
+          <SignUpButton/>
         </header>
         {children}
         <footer></footer>
