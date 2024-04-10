@@ -28,7 +28,6 @@
 .searchBar {
     display: flex;
     position: relative;
-    margin-left: auto;
 }
 
 .searchInput {

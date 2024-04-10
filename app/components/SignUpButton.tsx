@@ -1,11 +1,14 @@
 import React from 'react'
-import style from './SignUpButton.module.css'
+import styles from './SignUpButton.module.css'
 import Link from 'next/link'
-import { register } from 'module'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 
 const SignUpButton = () => {
   return (
-    <div><Link href="/register">Sign Up</Link></div>
+    <Link href="/register" className={styles.button}> 
+        <FontAwesomeIcon icon={faSignIn} className={styles.searchIcon} /> Sign Up
+    </Link>
   )
 }
 

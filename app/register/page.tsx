@@ -1,10 +1,11 @@
 import Link from "next/link";
+import SignUpForm from "./components/SignUpForm";
 
 
 export default function Home() {
   return (
     <main>
-        <h1>Sign Up</h1>
+        <SignUpForm/>
     </main>
   );
 }
