@@ -26,6 +26,7 @@ This is just a consept site which shows an idea of what FluentSubtitle could loo
 ## Functional Requirements
 
 - [X] Start screen with button navigation for movie list and contact information.
-- [X] Listing of movies.
+- [X] Recieve metadata from the movieDatabase
+- [X] Listing movies with data from api.
 - [X] Sub page for movie including list of subtitles.
 - [X] Sign up page with a fake form.
