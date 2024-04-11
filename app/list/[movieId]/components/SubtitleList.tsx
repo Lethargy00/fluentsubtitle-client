@@ -7,6 +7,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from './SubtitleList.module.css';
 
+// Make an interface for the subtitles.
 interface Subtitle {
     user: string;
     language: string;
@@ -15,6 +16,7 @@ interface Subtitle {
     totalDownloads: number;
 }   
 
+// Create an array with fake subtitles.
 const subtitles: Subtitle[] = [
 {
     user: "Markus098",
