@@ -30,6 +30,7 @@ This is just a consept site which shows an idea of what FluentSubtitle could loo
 - [X] Listing movies with data from api.
 - [X] Sub page for movie including list of subtitles.
 - [X] Sign up page with a fake form.
+- [X] Setup a contact page.
 
 
 # Analysis
