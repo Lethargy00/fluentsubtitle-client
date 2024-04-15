@@ -3,6 +3,9 @@ For the best experience i recommend using Firefox browser because chromium brows
 
 ## Getting Started
 
+```bash
+npm install
+```
 
 ```bash
 npm run dev
