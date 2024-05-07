@@ -3,14 +3,14 @@
   flex-wrap: wrap;
   margin-top: 25px;
   border-radius: 25px;
-  background-color: #373737;
+  background-color: var(--color-alt-bg);
   flex-grow: 1;
 }
 
 .container > img {
   border-radius: 25px;
   padding: 15px;
-  max-height: 200px;
+  max-height: 150px;
 }
 
 .container > div {
@@ -26,10 +26,13 @@
 
 .container h2 {
   margin-top: 15px;
-  font-size: 35px;
+  font-size: 25px;
 }
-.container p {
-  max-width: 500px;
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
 }
 
 .star {
@@ -38,6 +41,10 @@
 
 .heart {
   color: #272727;
+}
+
+.heart:hover {
+  color: red;
 }
 
 .downloadCount {

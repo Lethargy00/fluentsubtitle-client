@@ -1,25 +1,25 @@
 .container {
-    border-radius: 15px;
-    border: 15px #373737 solid;
-    background-color: #373737;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: var(--color-alt-bg);
 }
 
 .container h1 {
-    font-size: 30px;
-    background-color: #272727;
-    border: 15px solid #272727;
-    border-radius: 15px;
+  font-size: 30px;
+  background-color: var(--color-bg);
+  padding: 15px;
+  border-radius: 15px;
 }
 
 .container h2 {
-    margin: 15px 15px 0px 15px;
-    border: #272727 solid 15px;
-    border-radius: 15px;
-    background-color: #272727;
+  margin: 15px 15px 0px 15px;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: var(--color-bg);
 }
 
 .container h2 span {
-    background-color: #373737;
-    border: #373737 solid 6px;
-    border-radius: 8px;
+  background-color: var(--color-alt-bg);
+  padding: 6px;
+  border-radius: 8px;
 }

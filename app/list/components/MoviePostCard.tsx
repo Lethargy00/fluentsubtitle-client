@@ -69,11 +69,7 @@ const MovieDetails: React.FC<{ movieId: string }> = ({ movieId }) => {
       <img src={imageUrl} alt={movie.title} />
       <div>
         <div className={styles.movieTitle}>
-          <Link
-            href={`/list/${movieId}`}
-            key={movieId}
-            className="hover:underline"
-          >
+          <Link href={`/list/${movieId}`} key={movieId}>
             <h2>
               {movie.title} ({releaseYear})
             </h2>
@@ -84,7 +80,7 @@ const MovieDetails: React.FC<{ movieId: string }> = ({ movieId }) => {
             <FontAwesomeIcon icon={faHeart} className={styles.heart} />
           </h2>
         </div>
-        <p>{movie.overview}</p>
+        <p className={styles.text}>{movie.overview}</p>
         <div className={styles.downloadCount}>
           <p>
             25.980
