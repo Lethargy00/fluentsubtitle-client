@@ -5,8 +5,7 @@ interface UsePerformSearchResult {
 }
 
 export const usePerformSearch = (
-  searchQuery: string,
-  selectedLanguage: string
+  searchQuery: string
 ): UsePerformSearchResult => {
   const [results, setResults] = useState<any[]>([]);
 
@@ -14,7 +13,7 @@ export const usePerformSearch = (
     if (searchQuery.trim() !== "") {
       const apiKey = "4421cf94a11108972354abe55a5af248";
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&language=${selectedLanguage}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`
       );
       const data = await response.json();
       console.log(data.results);

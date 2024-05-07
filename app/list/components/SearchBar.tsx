@@ -70,10 +70,7 @@ const SearchBar: React.FC = () => {
     setSearchQuery(event.target.value); // Updates the search query state.
   };
 
-  const { performSearch } = usePerformSearch(
-    searchQuery,
-    selectedLanguage.value
-  );
+  const { performSearch } = usePerformSearch(searchQuery);
 
   // Rendering the SearchBar component.
   return (
