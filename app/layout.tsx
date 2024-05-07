@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Image from 'next/image'
+import Image from "next/image";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SearchBar from "./components/SearchBar";
 import Link from "next/link";
 import SignUpButton from "./components/SignUpButton";
 
@@ -21,20 +20,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className='ml-2'>
-          <Link className="ml-5 text-3xl flex items-center hover:text-purple-500" href="/">
-            <Image 
-              src='/favicon.ico'
+        <header className="ml-2">
+          <Link
+            className="ml-5 text-3xl flex items-center hover:text-purple-500"
+            href="/"
+          >
+            <Image
+              src="/favicon.ico"
               width={80}
-              height={80} 
+              height={80}
               alt="Company Logo"
             />
             FluentSubtitle
           </Link>
-          <SearchBar/>          
-          <SignUpButton/>
+          <SignUpButton />
         </header>
-        {children}
+        <main>{children}</main>
         <footer></footer>
       </body>
     </html>
