@@ -40,7 +40,7 @@
 }
 
 .heart {
-  color: #272727;
+  color: var(--color-bg);
 }
 
 .heart:hover {

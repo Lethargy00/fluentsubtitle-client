@@ -4,26 +4,26 @@
 
 .dropDown [class$="-control"] {
   height: 100%;
-  background-color: #373737;
+  background-color: var(--color-alt-bg);
   border: none;
   border-radius: 15px 0px 0px 15px;
 }
 
 .dropDown [class$="-menu"] {
-  background-color: #373737;
+  background-color: var(--color-alt-bg);
 }
 
 .dropDown [class$="-value-container"] {
-  background-color: #272727;
+  background-color: var(--color-bg);
 }
 
 .dropDown [class$="-option"] {
   overflow: hidden;
-  background-color: #373737;
+  background-color: var(--color-alt-bg);
 }
 
 .dropDown [class$="-option"]:hover {
-  background-color: #272727;
+  background-color: var(--color-bg);
 }
 
 .searchBar {
@@ -34,8 +34,8 @@
 
 .searchInput {
   padding-right: 50px;
-  background-color: #373737;
-  border: 15px solid #373737;
+  background-color: var(--color-alt-bg);
+  padding: 15px;
   border-right: 0px;
   border-radius: 0px 15px 15px 0px;
   margin-right: 15px;

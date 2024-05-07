@@ -1,0 +1,8 @@
+.themeButton {
+  margin-left: auto;
+  margin-right: 15px;
+  background-color: var(--color-alt-bg);
+  padding: 15px;
+  border-radius: 15px;
+  align-content: center;
+}

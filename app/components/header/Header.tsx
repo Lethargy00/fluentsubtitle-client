@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import style from "./Header.module.css";
 import SignUpButton from "../SignUpButton";
+import SetTheme from "../SetTheme";
 
 const header = () => {
   return (
@@ -17,6 +18,7 @@ const header = () => {
         />
         <span className={style.text}>FluentSubtitle</span>
       </Link>
+      <SetTheme />
       <SignUpButton />
     </header>
   );
