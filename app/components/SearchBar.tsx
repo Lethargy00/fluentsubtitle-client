@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { usePerformSearch } from "../hook/usePerformSearch";
+import { usePerformSearch } from "../api/search";
 import Select from "react-select";
 import styles from "./SearchBar.module.css";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
