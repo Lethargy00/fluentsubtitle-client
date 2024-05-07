@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 15px;
+}
+
+.link {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+}
+
+.image {
+  background-color: var(--color-alt-bg);
+  margin-right: 15px;
+  border-radius: 15px;
+}
+
+.text {
+  background-color: var(--color-alt-bg);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.text:hover {
+  color: var(--color-bg);
+}

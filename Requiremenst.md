@@ -11,11 +11,10 @@ This is just a concept site which shows an idea of what FluentSubtitle could loo
 - [x] Sub page for movie including list of subtitles.
 - [x] Sign up page with a fake form.
 - [ ] Redo all file directory.
-- [ ] Move the api to a dedicated folder.
+- [x] Move the api to a dedicated folder.
 - [ ] Add light and dark mode component.
 - [ ] Replace tailwind with vanilla css.
 - [x] Use https://flagicons.lipis.dev/ to add flag icons.
 - [ ] Add ability to search for movies.
 - [ ] Create a form for adding subtitles.
 - [ ] Ability to add subtitles to localDB.
-- [ ] Add recent searched movies to main movie list.

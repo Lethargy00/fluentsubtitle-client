@@ -29,6 +29,7 @@
 .searchBar {
   display: flex;
   position: relative;
+  margin-right: auto;
 }
 
 .searchInput {
@@ -46,8 +47,8 @@
 
 .searchIcon {
   position: absolute;
-  right: 35px; /* Adjust this value as needed */
-  top: 50%;
+  right: 35px;
+  top: 40%;
   transform: translateY(-50%);
   height: 16px;
 }

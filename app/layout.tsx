@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import SignUpButton from "./components/SignUpButton";
+import Header from "./components/header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,22 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <header className="ml-2">
-          <Link
-            className="ml-5 text-3xl flex items-center hover:text-purple-500"
-            href="/"
-          >
-            <Image
-              src="/favicon.ico"
-              width={80}
-              height={80}
-              alt="Company Logo"
-            />
-            FluentSubtitle
-          </Link>
-          <SignUpButton />
-        </header>
+      <body>
+        <Header />
         <main>{children}</main>
         <footer></footer>
       </body>

@@ -3,41 +3,57 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 39, 39, 39;
+  --color-bg: #dac0a3;
+  --color-alt-bg: #eadbc8;
+  --color-text: #000000;
+  --color-alt-text: #ffffff;
+  --color-dark-text: #dab693;
+  --color-placeholder: #8d7f6f;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 39, 39, 39;
+    --color-bg: #272727;
+    --color-alt-bg: #373737;
+    --color-text: #ffffff;
+    --color-alt-text: #000000;
+    --color-dark-text: #1c1c1c;
+    --color-placeholder: #9ca3af;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-rgb));
+  color: var(--color-text);
+  background-color: var(--color-bg);
   display: flex;
-  justify-content: center;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: center;
-  position: fixed;
-  width: 100%;
-  height: auto;
-  color: rgb(var(--foreground-rgb));
+  flex-direction: column;
 }
 
 main {
   display: flex;
+  align-self: center;
   flex-direction: column;
-  margin: 100px 50px 0px 50px;
+  margin-top: 25px;
   max-width: 1200px;
-  max-height: 80vh;
-  overflow-x: auto;
-  flex-grow: 1;
+}
+
+.title {
+  font-size: 35px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.button {
+  font-size: 25px;
+  background-color: var(--color-alt-bg);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.button:hover {
+  color: var(--color-bg);
 }
