@@ -14,7 +14,7 @@ This is just a concept site which shows an idea of what FluentSubtitle could loo
 - [ ] Move the api to a dedicated folder.
 - [ ] Add light and dark mode component.
 - [ ] Replace tailwind with vanilla css.
-- [ ] Use https://flagicons.lipis.dev/ to add flag icons.
+- [x] Use https://flagicons.lipis.dev/ to add flag icons.
 - [ ] Add ability to search for movies.
 - [ ] Create a form for adding subtitles.
 - [ ] Ability to add subtitles to localDB.

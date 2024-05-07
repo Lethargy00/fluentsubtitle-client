@@ -1,53 +1,53 @@
 .dropDown {
-    font-size: 30px;
+  font-size: 30px;
 }
 
-.dropDown [class$="-control"]{
-    height: 100%;
-    background-color: #373737;
-    border: none;
-    border-radius: 15px 0px 0px 15px;
+.dropDown [class$="-control"] {
+  height: 100%;
+  background-color: #373737;
+  border: none;
+  border-radius: 15px 0px 0px 15px;
 }
 
-.dropDown [class$="-menu"]{
-    background-color: #373737;
+.dropDown [class$="-menu"] {
+  background-color: #373737;
 }
 
 .dropDown [class$="-value-container"] {
-    background-color: #272727;
+  background-color: #272727;
 }
 
 .dropDown [class$="-option"] {
-    background-color: #373737;
+  overflow: hidden;
+  background-color: #373737;
 }
 
 .dropDown [class$="-option"]:hover {
-    background-color: #272727;
+  background-color: #272727;
 }
 
 .searchBar {
-    display: flex;
-    position: relative;
+  display: flex;
+  position: relative;
 }
 
 .searchInput {
-    padding-right: 50px;
-    background-color: #373737;
-    border: 15px solid #373737;
-    border-right: 0px;
-    border-radius: 0px 15px 15px 0px;
-    margin-right: 15px;
+  padding-right: 50px;
+  background-color: #373737;
+  border: 15px solid #373737;
+  border-right: 0px;
+  border-radius: 0px 15px 15px 0px;
+  margin-right: 15px;
 }
 
 .searchInput:focus {
-    outline: none;
+  outline: none;
 }
 
 .searchIcon {
-    position: absolute;
-    right: 35px; /* Adjust this value as needed */
-    top: 50%;
-    transform: translateY(-50%);
-    height: 16px;
+  position: absolute;
+  right: 35px; /* Adjust this value as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  height: 16px;
 }
-  
