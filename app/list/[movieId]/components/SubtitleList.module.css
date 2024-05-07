@@ -1,21 +1,21 @@
 .container {
-    overflow-x: auto;
-    max-height: 350px;
+  overflow-x: auto;
+  max-height: 350px;
 }
 
 .individualContainer {
-    border: 15px #373737 solid;
-    border-radius: 15px;
-    margin: 15px 45px 0px 45px;
-    background-color: #373737;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 15px 45px 0px 45px;
+  background-color: var(--color-alt-bg);
 }
 
 .individualContainer div {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .download:hover {
-    cursor: pointer;
-    color: #272727;
+  cursor: pointer;
+  color: var(--color-bg);
 }
