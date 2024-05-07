@@ -1,12 +1,13 @@
 // "use client" directive indicates that this component should be treated as a Client Component in Next.js.
-"use client"
+"use client";
 
 // Importing necessary React hooks and components.
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import Select from 'react-select';
-import styles from './SearchBar.module.css';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { usePerformSearch } from "../hook/usePerformSearch";
+import Select from "react-select";
+import styles from "./SearchBar.module.css";
 
 // Defining an interface for the language options.
 interface Language {
@@ -17,48 +18,49 @@ interface Language {
 
 // Array of languages with their codes, labels, and emojis.
 const languages: Language[] = [
-  { code: 'en', label: 'English', emoji: '🇬🇧' },
-  { code: 'se', label: 'Swedish', emoji: '🇸🇪' },
-  { code: 'es', label: 'Spanish', emoji: '🇪🇸' },
-  { code: 'fr', label: 'French', emoji: '🇫🇷' },
-  { code: 'de', label: 'German', emoji: '🇩🇪' },
-  { code: 'it', label: 'Italian', emoji: '🇮🇹' },
-  { code: 'ru', label: 'Russian', emoji: '🇷🇺' },
-  { code: 'zh', label: 'Chinese', emoji: '🇨🇳' },
-  { code: 'ja', label: 'Japanese', emoji: '🇯🇵' },
-  { code: 'ko', label: 'Korean', emoji: '🇰🇷' },
-  { code: 'ar', label: 'Arabic', emoji: '🇸🇦' },
-  { code: 'sw', label: 'Swahili', emoji: '🇰🇪' },
-  { code: 'pt', label: 'Portuguese', emoji: '🇵🇹' },
-  { code: 'nl', label: 'Dutch', emoji: '🇳🇱' },
-  { code: 'hi', label: 'Hindi', emoji: '🇮🇳' },
-  { code: 'bn', label: 'Bengali', emoji: '🇧🇩' },
-  { code: 'es', label: 'Spanish', emoji: '🇪🇸' },
-  { code: 'fr', label: 'French', emoji: '🇫🇷' },
-  { code: 'de', label: 'German', emoji: '🇩🇪' },
-  { code: 'it', label: 'Italian', emoji: '🇮🇹' },
-  { code: 'ru', label: 'Russian', emoji: '🇷🇺' },
-  { code: 'zh', label: 'Chinese', emoji: '🇨🇳' },
-  { code: 'ja', label: 'Japanese', emoji: '🇯🇵' },
-  { code: 'ko', label: 'Korean', emoji: '🇰🇷' },
-  { code: 'ar', label: 'Arabic', emoji: '🇸🇦' },
-  { code: 'sw', label: 'Swahili', emoji: '🇰🇪' },
-  { code: 'pt', label: 'Portuguese', emoji: '🇵🇹' },
-  { code: 'nl', label: 'Dutch', emoji: '🇳🇱' },
-  { code: 'hi', label: 'Hindi', emoji: '🇮🇳' },
-  { code: 'bn', label: 'Bengali', emoji: '🇧🇩' },
+  { code: "en", label: "English", emoji: "🇬🇧" },
+  { code: "se", label: "Swedish", emoji: "🇸🇪" },
+  { code: "es", label: "Spanish", emoji: "🇪🇸" },
+  { code: "fr", label: "French", emoji: "🇫🇷" },
+  { code: "de", label: "German", emoji: "🇩🇪" },
+  { code: "it", label: "Italian", emoji: "🇮🇹" },
+  { code: "ru", label: "Russian", emoji: "🇷🇺" },
+  { code: "zh", label: "Chinese", emoji: "🇨🇳" },
+  { code: "ja", label: "Japanese", emoji: "🇯🇵" },
+  { code: "ko", label: "Korean", emoji: "🇰🇷" },
+  { code: "ar", label: "Arabic", emoji: "🇸🇦" },
+  { code: "sw", label: "Swahili", emoji: "🇰🇪" },
+  { code: "pt", label: "Portuguese", emoji: "🇵🇹" },
+  { code: "nl", label: "Dutch", emoji: "🇳🇱" },
+  { code: "hi", label: "Hindi", emoji: "🇮🇳" },
+  { code: "bn", label: "Bengali", emoji: "🇧🇩" },
+  { code: "es", label: "Spanish", emoji: "🇪🇸" },
+  { code: "fr", label: "French", emoji: "🇫🇷" },
+  { code: "de", label: "German", emoji: "🇩🇪" },
+  { code: "it", label: "Italian", emoji: "🇮🇹" },
+  { code: "ru", label: "Russian", emoji: "🇷🇺" },
+  { code: "zh", label: "Chinese", emoji: "🇨🇳" },
+  { code: "ja", label: "Japanese", emoji: "🇯🇵" },
+  { code: "ko", label: "Korean", emoji: "🇰🇷" },
+  { code: "ar", label: "Arabic", emoji: "🇸🇦" },
+  { code: "sw", label: "Swahili", emoji: "🇰🇪" },
+  { code: "pt", label: "Portuguese", emoji: "🇵🇹" },
+  { code: "nl", label: "Dutch", emoji: "🇳🇱" },
+  { code: "hi", label: "Hindi", emoji: "🇮🇳" },
+  { code: "bn", label: "Bengali", emoji: "🇧🇩" },
 ];
 
 // Mapping the languages array to the format expected by the Select component.
-const languageOptions = languages.map(lang => ({
+const languageOptions = languages.map((lang) => ({
   value: lang.code, // Value used by the Select component.
   label: `${lang.emoji}`, // Label displayed in the dropdown.
 }));
 
 // SearchBar component definition.
 const SearchBar: React.FC = () => {
-  // useState hook to manage the selected language state.
+  // useState hooks
   const [selectedLanguage, setSelectedLanguage] = useState(languageOptions[0]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Handler function for when the selected language changes.
   const handleLanguageChange = (newValue: any, actionMeta: any) => {
@@ -70,7 +72,19 @@ const SearchBar: React.FC = () => {
     DropdownIndicator: () => null,
   };
 
- // Rendering the SearchBar component.
+  // Handler function for when the search query changes.
+  const handleSearchQueryChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchQuery(event.target.value); // Updates the search query state.
+  };
+
+  const { performSearch } = usePerformSearch(
+    searchQuery,
+    selectedLanguage.value
+  );
+
+  // Rendering the SearchBar component.
   return (
     <div className={styles.searchBar}>
       {/* Select component for choosing a language. */}
@@ -82,15 +96,19 @@ const SearchBar: React.FC = () => {
         isSearchable={false} // Removes search function.
         components={customComponents} // Override the DropdownIndicator to remove the arrow.
       />
-      
+
       {/* Input field for search. */}
       <input
         type="text"
         placeholder="Search..."
         className={styles.searchInput} // CSS class for styling.
+        value={searchQuery}
+        onChange={handleSearchQueryChange}
       />
       {/* Icon for the search input. */}
-      <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchIcon} />
+      <button onClick={performSearch} className={styles.searchIcon}>
+        <FontAwesomeIcon icon={faMagnifyingGlass} />
+      </button>
     </div>
   );
 };
