@@ -75,7 +75,7 @@ const MovieDetails: React.FC<{ movieId: string }> = ({ movieId }) => {
             </h2>
           </Link>
           <h2>
-            {movie.vote_average} / 10{" "}
+            {Math.round(movie.vote_average * 10) / 10} / 10{" "}
             <FontAwesomeIcon icon={faStar} className={styles.star} />{" "}
             <FontAwesomeIcon icon={faHeart} className={styles.heart} />
           </h2>
