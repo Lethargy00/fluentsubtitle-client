@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  background-color: var(--color-alt-bg);
+  border-radius: 15px;
+}
+
+.description {
+  margin: 15px;
+}
+
+.title {
+  font-size: 35px;
+}
+
+.image {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  height: 200px;
+}

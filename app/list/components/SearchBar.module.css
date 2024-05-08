@@ -19,11 +19,20 @@
 
 .dropDown [class$="-option"] {
   overflow: hidden;
+  border-radius: 5px;
   background-color: var(--color-alt-bg);
+}
+
+.dropDown [class$="-option"] > span {
+  border-radius: 5px;
 }
 
 .dropDown [class$="-option"]:hover {
   background-color: var(--color-bg);
+}
+
+.dropDown [class$="-singleValue"] > span {
+  border-radius: 5px;
 }
 
 .searchBar {

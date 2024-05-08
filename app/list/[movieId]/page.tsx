@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from "react";
 import SubtitleList from "./components/SubtitleList";
 import { useFetchMovie } from "@/app/api/fetchMovie";
+import style from "./page.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface Movie {
   id: number;
@@ -32,11 +35,23 @@ export default function MovieDetailsPage({
     return <div>Loading...</div>;
   }
 
-  console.log(movieData);
+  let imageUrl = `https://image.tmdb.org/t/p/w500${movieData.poster_path}`;
+
+  if (movieData.poster_path === null) {
+    imageUrl = "https://placehold.co/400x600?text=No+Photo&font=roboto";
+  }
 
   return (
     <>
-      <h1>{movieData.title}</h1>
+      <div className={style.container}>
+        <img src={imageUrl} alt={movieData.title} className={style.image} />
+        <div className={style.description}>
+          <h1 className={style.title}>
+            {movieData.title} ({movieData.release_date})
+          </h1>
+          <p>{movieData.overview}</p>
+        </div>
+      </div>
       <SubtitleList />
     </>
   );
