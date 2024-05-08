@@ -12,7 +12,6 @@ export default function MovieDetailsPage({
 
   return (
     <>
-      <MovieDetails movieId={movieId} />
       <SubtitleList />
     </>
   );

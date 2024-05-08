@@ -8,7 +8,7 @@ import { usePerformSearch } from "../api/search";
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { performSearch } = usePerformSearch(searchQuery);
+  const { results, performSearch } = usePerformSearch(searchQuery);
 
   useEffect(() => {
     performSearch();
@@ -18,10 +18,11 @@ export default function Home() {
     <>
       <SearchBar onSearch={setSearchQuery} />
       <div className={style.listContainer}>
-        <MovieDetails movieId={"jurassic-shark"} />
+        <MovieDetails movies={results} />
+        {/* <MovieDetails movieId={"jurassic-shark"} />
         <MovieDetails movieId={"jurassic-shark-2"} />
         <MovieDetails movieId={"jurassic-shark-3"} />
-        <MovieDetails movieId={"2-headed-shark-attack"} />
+        <MovieDetails movieId={"2-headed-shark-attack"} /> */}
       </div>
     </>
   );
