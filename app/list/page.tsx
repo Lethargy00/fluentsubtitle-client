@@ -19,10 +19,6 @@ export default function Home() {
       <SearchBar onSearch={setSearchQuery} />
       <div className={style.listContainer}>
         <MovieDetails movies={results} />
-        {/* <MovieDetails movieId={"jurassic-shark"} />
-        <MovieDetails movieId={"jurassic-shark-2"} />
-        <MovieDetails movieId={"jurassic-shark-3"} />
-        <MovieDetails movieId={"2-headed-shark-attack"} /> */}
       </div>
     </>
   );
