@@ -47,8 +47,12 @@ const languageOptions = languages.map((lang) => ({
   label: lang.flag, // Label displayed in the dropdown.
 }));
 
+interface SearchBarProps {
+  onSearch: (query: string) => void;
+}
+
 // SearchBar component definition.
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   // useState hooks
   const [selectedLanguage, setSelectedLanguage] = useState(languageOptions[0]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -63,14 +67,15 @@ const SearchBar: React.FC = () => {
     DropdownIndicator: () => null,
   };
 
-  // Handler function for when the search query changes.
   const handleSearchQueryChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSearchQuery(event.target.value); // Updates the search query state.
+    setSearchQuery(event.target.value);
   };
 
-  const { performSearch } = usePerformSearch(searchQuery);
+  const handleSearch = () => {
+    onSearch(searchQuery);
+  };
 
   // Rendering the SearchBar component.
   return (
@@ -94,7 +99,7 @@ const SearchBar: React.FC = () => {
         onChange={handleSearchQueryChange}
       />
       {/* Icon for the search input. */}
-      <button onClick={performSearch} className={styles.searchIcon}>
+      <button onClick={handleSearch} className={styles.searchIcon}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
     </div>
