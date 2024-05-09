@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import SubtitleList from "./components/SubtitleList";
 import { useFetchMovie } from "@/app/api/fetchMovie";
 import style from "./page.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
+import SubtitleForm from "./components/SubtitleForm";
 
 interface Movie {
   id: number;
@@ -22,6 +21,7 @@ export default function MovieDetailsPage({
 }) {
   const movieId = params.movieId;
   const [movieData, setMovieData] = useState<Movie | null>(null);
+  const [showSubtitleForm, setShowSubtitleForm] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +52,13 @@ export default function MovieDetailsPage({
           <p>{movieData.overview}</p>
         </div>
       </div>
+      <button onClick={() => setShowSubtitleForm(true)}>Add Subtitle</button>
+      {showSubtitleForm && (
+        <SubtitleForm
+          onFormClose={() => setShowSubtitleForm(false)}
+          movieId={movieId}
+        />
+      )}
       <SubtitleList />
     </>
   );
