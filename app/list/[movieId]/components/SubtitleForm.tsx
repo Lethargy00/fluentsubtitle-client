@@ -1,5 +1,98 @@
 import { openDB } from "idb";
 import { useState } from "react";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
+import Select from "react-select";
+
+// Defining an interface for the language options.
+interface Language {
+  value: string; // Language code.
+  language: string; // Flag representing the language.
+  label: JSX.Element; // Language Label.
+}
+
+// Array of languages with their codes, labels, and emojis.
+const languages: Language[] = [
+  {
+    value: "en",
+    language: "English",
+    label: <span className="fi fi-gb"></span>,
+  },
+  {
+    value: "se",
+    language: "Swedish",
+    label: <span className="fi fi-se"></span>,
+  },
+  {
+    value: "es",
+    language: "Spanish",
+    label: <span className="fi fi-es"></span>,
+  },
+  {
+    value: "fr",
+    language: "French",
+    label: <span className="fi fi-fr"></span>,
+  },
+  {
+    value: "de",
+    language: "German",
+    label: <span className="fi fi-de"></span>,
+  },
+  {
+    value: "it",
+    language: "Italian",
+    label: <span className="fi fi-it"></span>,
+  },
+  {
+    value: "ru",
+    language: "Russian",
+    label: <span className="fi fi-ru"></span>,
+  },
+  {
+    value: "zh",
+    language: "Chinese",
+    label: <span className="fi fi-cn"></span>,
+  },
+  {
+    value: "ja",
+    language: "Japanese",
+    label: <span className="fi fi-jp"></span>,
+  },
+  {
+    value: "ko",
+    language: "Korean",
+    label: <span className="fi fi-kr"></span>,
+  },
+  {
+    value: "ar",
+    language: "Arabic",
+    label: <span className="fi fi-sa"></span>,
+  },
+  {
+    value: "sw",
+    language: "Swahili",
+    label: <span className="fi fi-tz"></span>,
+  },
+  {
+    value: "pt",
+    language: "Portuguese",
+    label: <span className="fi fi-pt"></span>,
+  },
+  {
+    value: "nl",
+    language: "Dutch",
+    label: <span className="fi fi-nl"></span>,
+  },
+  {
+    value: "hi",
+    language: "Hindi",
+    label: <span className="fi fi-in"></span>,
+  },
+  {
+    value: "bn",
+    language: "Bengali",
+    label: <span className="fi fi-bn"></span>,
+  },
+];
 
 interface SubtitleFormProps {
   onFormClose: () => void;
@@ -12,7 +105,9 @@ interface Subtitle {
   language: string;
   isForHearingImpaired: boolean;
   uploadedDate: string;
-  subtitleFile: File;
+  subtitleFileName: string;
+  subtitleFileSize: number;
+  subtitleFileType: string;
 }
 
 interface Movie {
@@ -42,7 +137,9 @@ const saveSubtitleInIndexedDB = async (
       language: subtitleData.language,
       isForHearingImpaired: subtitleData.isForHearingImpaired,
       uploadedDate: currentDate,
-      subtitleFile: subtitleData.subtitleFile,
+      subtitleFileName: subtitleData.subtitleFileName,
+      subtitleFileSize: subtitleData.subtitleFileSize,
+      subtitleFileType: subtitleData.subtitleFileType,
     });
     await db.put("subtitles", existingMovie);
   } else {
@@ -55,7 +152,9 @@ const saveSubtitleInIndexedDB = async (
           language: subtitleData.language,
           isForHearingImpaired: subtitleData.isForHearingImpaired,
           uploadedDate: currentDate,
-          subtitleFile: subtitleData.subtitleFile,
+          subtitleFileName: subtitleData.subtitleFileName,
+          subtitleFileSize: subtitleData.subtitleFileSize,
+          subtitleFileType: subtitleData.subtitleFileType,
         },
       ],
     });
@@ -67,9 +166,13 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
   movieId,
 }) => {
   const [uploaderName, setUploaderName] = useState("Unknown");
-  const [language, setLanguage] = useState("Unknown");
+  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [isForHearingImpaired, setIsForHearingImpaired] = useState(false);
   const [subtitleFile, setSubtitleFile] = useState<File | null>(null);
+
+  const handleLanguageChange = (selectedOption: any, actionMeta: any) => {
+    setSelectedLanguage(selectedOption);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,13 +182,19 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
       formData.append("subtitleFile", subtitleFile);
 
       try {
+        console.log("File name:", subtitleFile.name); // Log the file name
+        const fileExtension = subtitleFile.name.split(".").pop();
+        console.log("File extension:", fileExtension); // Log the extracted file extension
+
         const subtitleData: Subtitle = {
           id: "",
           uploaderName: uploaderName,
-          language: language,
+          language: selectedLanguage.value,
           isForHearingImpaired: isForHearingImpaired,
           uploadedDate: new Date().toISOString(),
-          subtitleFile: subtitleFile,
+          subtitleFileName: subtitleFile.name,
+          subtitleFileSize: subtitleFile.size,
+          subtitleFileType: fileExtension || "",
         };
         saveSubtitleInIndexedDB(movieId, subtitleData);
         onFormClose();
@@ -106,14 +215,12 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
           onChange={(e) => setUploaderName(e.target.value)}
         />
       </label>
-      <label>
-        Language:
-        <input
-          type="text"
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-        />
-      </label>
+      <Select
+        value={selectedLanguage} // Current selected language.
+        options={languages} // Options to choose from.
+        onChange={handleLanguageChange} // Handler for when the selection changes.
+        isSearchable={false} // Removes search function.
+      />
       <label>
         For Hearing Impaired:
         <input
