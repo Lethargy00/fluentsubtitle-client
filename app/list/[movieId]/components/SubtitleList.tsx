@@ -1,119 +1,119 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import styles from "./SubtitleList.module.css";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import style from "./SubtitleList.module.css";
+import { openDB } from "idb";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+import { languages } from "@/app/constants/languages";
+import { Subtitle } from "@/app/interfaces/subtitle";
+import { addSubtitle } from "@/app/db/addSubtitle";
+import { deleteSubtitle } from "@/app/db/deleteSubtitle";
+import SubtitleForm from "./SubtitleForm";
 
-// Make an interface for the subtitles.
-interface Subtitle {
-  user: string;
-  language: string;
-  flag: JSX.Element;
-  uploadDate: string;
-  totalDownloads: number;
+interface SubtitleListProps {
+  movieId: string;
 }
 
-// Create an array with fake subtitles.
-const subtitles: Subtitle[] = [
-  {
-    user: "Markus098",
-    language: "English",
-    flag: <span className="fi fi-gb"></span>,
-    uploadDate: "2024-04-01",
-    totalDownloads: 12000,
-  },
-  {
-    user: "Darwin954",
-    language: "Spanish",
-    flag: <span className="fi fi-es"></span>,
-    uploadDate: "2024-04-02",
-    totalDownloads: 8500,
-  },
-  {
-    user: "Philip546",
-    language: "French",
-    flag: <span className="fi fi-fr"></span>,
-    uploadDate: "2024-04-03",
-    totalDownloads: 5000,
-  },
-  {
-    user: "Alice123",
-    language: "German",
-    flag: <span className="fi fi-de"></span>,
-    uploadDate: "2024-04-04",
-    totalDownloads: 7000,
-  },
-  {
-    user: "Bob456",
-    language: "Italian",
-    flag: <span className="fi fi-it"></span>,
-    uploadDate: "2024-04-05",
-    totalDownloads: 6000,
-  },
-  {
-    user: "Charlie789",
-    language: "Portuguese",
-    flag: <span className="fi fi-pt"></span>,
-    uploadDate: "2024-04-06",
-    totalDownloads: 4500,
-  },
-  {
-    user: "Diana000",
-    language: "Russian",
-    flag: <span className="fi fi-ru"></span>,
-    uploadDate: "2024-04-07",
-    totalDownloads: 3000,
-  },
-  {
-    user: "Eva999",
-    language: "Chinese",
-    flag: <span className="fi fi-cn"></span>,
-    uploadDate: "2024-04-08",
-    totalDownloads: 2500,
-  },
-  {
-    user: "Frank888",
-    language: "Japanese",
-    flag: <span className="fi fi-jp"></span>,
-    uploadDate: "2024-04-09",
-    totalDownloads: 2000,
-  },
-  {
-    user: "Grace666",
-    language: "Korean",
-    flag: <span className="fi fi-kr"></span>,
-    uploadDate: "2024-04-10",
-    totalDownloads: 1500,
-  },
-];
-
-function renderSubtitles(subtitles: Subtitle[]) {
-  return subtitles.map((subtitle, index) => (
-    <div key={index} className={styles.individualContainer}>
-      <div>
-        <span>
-          <FontAwesomeIcon icon={faUser} /> {subtitle.user}
-        </span>
-        <span>
-          {subtitle.uploadDate} <FontAwesomeIcon icon={faCalendarAlt} />
-        </span>
-      </div>
-      <div>
-        <span>
-          {subtitle.flag} {subtitle.language}
-        </span>
-        <span className={styles.download}>
-          {subtitle.totalDownloads} <FontAwesomeIcon icon={faDownload} />
-        </span>
-      </div>
-    </div>
-  ));
-}
-
-const SubtitleList = () => {
-  return <div className={styles.container}>{renderSubtitles(subtitles)}</div>;
+const getLanguageInfo = (languageCode: string) => {
+  const language = languages.find((lang) => lang.value === languageCode);
+  if (language) {
+    return {
+      flag: language.label,
+      value: language.value,
+      label: language.language,
+    };
+  } else {
+    return {
+      flag: null,
+      value: "",
+      label: "",
+    };
+  }
 };
 
+const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
+  const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
+  const [isFirstBoot, setIsFirstBoot] = useState(true);
+  const [showSubtitleForm, setShowSubtitleForm] = useState(false);
+
+  useEffect(() => {
+    console.log("meow");
+    const fetchSubtitles = async () => {
+      const db = await openDB("subtitlesDB", 1, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains("subtitles")) {
+            db.createObjectStore("subtitles", { keyPath: "id" });
+          }
+        },
+      });
+      const storedSubtitles = await db.get("subtitles", movieId);
+      if (storedSubtitles) {
+        setSubtitles(storedSubtitles.subtitles);
+      }
+    };
+
+    fetchSubtitles();
+  }, [movieId]);
+
+  const addSubtitleHandler = async (newSubtitle: Subtitle) => {
+    await addSubtitle(movieId, newSubtitle);
+    const updatedSubtitles = [...subtitles, newSubtitle];
+    setSubtitles(updatedSubtitles);
+  };
+
+  const deleteSubtitleHandler = async (subtitleId: string) => {
+    await deleteSubtitle(movieId, subtitleId);
+    const updatedSubtitles = subtitles.filter(
+      (subtitle) => subtitle.id !== subtitleId
+    );
+    setSubtitles(updatedSubtitles);
+  };
+  return (
+    <>
+      <button onClick={() => setShowSubtitleForm(true)}>Add Subtitle</button>
+      <div className={style.formContainer}>
+        {showSubtitleForm && (
+          <SubtitleForm
+            onFormClose={() => setShowSubtitleForm(false)}
+            movieId={movieId}
+            addSubtitleHandler={addSubtitleHandler}
+          />
+        )}
+      </div>
+      <div className={style.container}>
+        {subtitles.map((subtitle, index) => (
+          <div key={index} className={style.individualContainer}>
+            <div>
+              <span>
+                <FontAwesomeIcon icon={faUser} /> {subtitle.uploaderName}
+              </span>
+              <span>
+                {subtitle.uploadedDate.slice(0, 10)}{" "}
+                <FontAwesomeIcon icon={faCalendarAlt} />
+              </span>
+              <span
+                className={style.delete}
+                onClick={() => deleteSubtitleHandler(subtitle.id)}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </span>
+            </div>
+            <div>
+              <span>
+                {getLanguageInfo(subtitle.language).flag}{" "}
+                {getLanguageInfo(subtitle.language).label}
+              </span>
+              <span className={style.download}>
+                0 <FontAwesomeIcon icon={faDownload} />
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
 export default SubtitleList;

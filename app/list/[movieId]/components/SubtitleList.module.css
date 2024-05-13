@@ -1,3 +1,7 @@
+.formContainer {
+  background-color: var(--color-alt-bg);
+}
+
 .container {
   overflow-x: auto;
   max-height: 350px;

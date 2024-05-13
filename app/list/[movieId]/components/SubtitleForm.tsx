@@ -1,176 +1,26 @@
-import { openDB } from "idb";
 import { useState } from "react";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 import Select from "react-select";
-
-// Defining an interface for the language options.
-interface Language {
-  value: string; // Language code.
-  language: string; // Flag representing the language.
-  label: JSX.Element; // Language Label.
-}
-
-// Array of languages with their codes, labels, and emojis.
-const languages: Language[] = [
-  {
-    value: "en",
-    language: "English",
-    label: <span className="fi fi-gb"></span>,
-  },
-  {
-    value: "se",
-    language: "Swedish",
-    label: <span className="fi fi-se"></span>,
-  },
-  {
-    value: "es",
-    language: "Spanish",
-    label: <span className="fi fi-es"></span>,
-  },
-  {
-    value: "fr",
-    language: "French",
-    label: <span className="fi fi-fr"></span>,
-  },
-  {
-    value: "de",
-    language: "German",
-    label: <span className="fi fi-de"></span>,
-  },
-  {
-    value: "it",
-    language: "Italian",
-    label: <span className="fi fi-it"></span>,
-  },
-  {
-    value: "ru",
-    language: "Russian",
-    label: <span className="fi fi-ru"></span>,
-  },
-  {
-    value: "zh",
-    language: "Chinese",
-    label: <span className="fi fi-cn"></span>,
-  },
-  {
-    value: "ja",
-    language: "Japanese",
-    label: <span className="fi fi-jp"></span>,
-  },
-  {
-    value: "ko",
-    language: "Korean",
-    label: <span className="fi fi-kr"></span>,
-  },
-  {
-    value: "ar",
-    language: "Arabic",
-    label: <span className="fi fi-sa"></span>,
-  },
-  {
-    value: "sw",
-    language: "Swahili",
-    label: <span className="fi fi-tz"></span>,
-  },
-  {
-    value: "pt",
-    language: "Portuguese",
-    label: <span className="fi fi-pt"></span>,
-  },
-  {
-    value: "nl",
-    language: "Dutch",
-    label: <span className="fi fi-nl"></span>,
-  },
-  {
-    value: "hi",
-    language: "Hindi",
-    label: <span className="fi fi-in"></span>,
-  },
-  {
-    value: "bn",
-    language: "Bengali",
-    label: <span className="fi fi-bn"></span>,
-  },
-];
+import { languages } from "@/app/constants/languages";
+import { Subtitle } from "@/app/interfaces/subtitle";
+import { addSubtitle } from "@/app/db/addSubtitle";
 
 interface SubtitleFormProps {
   onFormClose: () => void;
   movieId: string;
+  addSubtitleHandler: (newSubtitle: Subtitle) => void;
 }
-
-interface Subtitle {
-  id: string;
-  uploaderName: string;
-  language: string;
-  isForHearingImpaired: boolean;
-  uploadedDate: string;
-  subtitleFileName: string;
-  subtitleFileSize: number;
-  subtitleFileType: string;
-}
-
-interface Movie {
-  id: string;
-  subtitles: Subtitle[];
-}
-
-const saveSubtitleInIndexedDB = async (
-  movieId: string,
-  subtitleData: Subtitle
-) => {
-  const db = await openDB("subtitlesDB", 1, {
-    upgrade(db) {
-      db.createObjectStore("subtitles", { keyPath: "id" });
-    },
-  });
-
-  const currentDate = new Date().toISOString();
-
-  const existingMovie: Movie | undefined = await db.get("subtitles", movieId);
-
-  if (existingMovie) {
-    const subtitleId = `${movieId}-${existingMovie.subtitles.length + 1}`;
-    existingMovie.subtitles.push({
-      id: subtitleId,
-      uploaderName: subtitleData.uploaderName,
-      language: subtitleData.language,
-      isForHearingImpaired: subtitleData.isForHearingImpaired,
-      uploadedDate: currentDate,
-      subtitleFileName: subtitleData.subtitleFileName,
-      subtitleFileSize: subtitleData.subtitleFileSize,
-      subtitleFileType: subtitleData.subtitleFileType,
-    });
-    await db.put("subtitles", existingMovie);
-  } else {
-    await db.add("subtitles", {
-      id: movieId,
-      subtitles: [
-        {
-          id: `${movieId}-1`,
-          uploaderName: subtitleData.uploaderName,
-          language: subtitleData.language,
-          isForHearingImpaired: subtitleData.isForHearingImpaired,
-          uploadedDate: currentDate,
-          subtitleFileName: subtitleData.subtitleFileName,
-          subtitleFileSize: subtitleData.subtitleFileSize,
-          subtitleFileType: subtitleData.subtitleFileType,
-        },
-      ],
-    });
-  }
-};
 
 const SubtitleForm: React.FC<SubtitleFormProps> = ({
   onFormClose,
   movieId,
+  addSubtitleHandler,
 }) => {
   const [uploaderName, setUploaderName] = useState("Unknown");
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [isForHearingImpaired, setIsForHearingImpaired] = useState(false);
   const [subtitleFile, setSubtitleFile] = useState<File | null>(null);
 
-  const handleLanguageChange = (selectedOption: any, actionMeta: any) => {
+  const handleLanguageChange = (selectedOption: any) => {
     setSelectedLanguage(selectedOption);
   };
 
@@ -187,7 +37,7 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
         console.log("File extension:", fileExtension); // Log the extracted file extension
 
         const subtitleData: Subtitle = {
-          id: "",
+          id: Date.now().toString(), // Generate a unique ID for the subtitle
           uploaderName: uploaderName,
           language: selectedLanguage.value,
           isForHearingImpaired: isForHearingImpaired,
@@ -196,7 +46,10 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
           subtitleFileSize: subtitleFile.size,
           subtitleFileType: fileExtension || "",
         };
-        saveSubtitleInIndexedDB(movieId, subtitleData);
+        await addSubtitle(movieId, subtitleData); // Use the addSubtitle function
+
+        addSubtitleHandler(subtitleData);
+
         onFormClose();
       } catch (error) {
         console.error("Error saving subtitle data to IndexedDB", error);

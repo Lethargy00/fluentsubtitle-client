@@ -21,7 +21,6 @@ export default function MovieDetailsPage({
 }) {
   const movieId = params.movieId;
   const [movieData, setMovieData] = useState<Movie | null>(null);
-  const [showSubtitleForm, setShowSubtitleForm] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,14 +51,8 @@ export default function MovieDetailsPage({
           <p>{movieData.overview}</p>
         </div>
       </div>
-      <button onClick={() => setShowSubtitleForm(true)}>Add Subtitle</button>
-      {showSubtitleForm && (
-        <SubtitleForm
-          onFormClose={() => setShowSubtitleForm(false)}
-          movieId={movieId}
-        />
-      )}
-      <SubtitleList />
+
+      <SubtitleList movieId={movieId} />
     </>
   );
 }
