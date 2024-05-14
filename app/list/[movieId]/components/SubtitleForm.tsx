@@ -63,39 +63,35 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className={style.formContainer}>
       <h2 className={style.headerText}>Upload subtitle</h2>
-      <div className={style.formHeader}>
-        <input
-          type="text"
-          placeholder="Username"
-          className={style.uploaderName}
-          value={uploaderName}
-          onChange={(e) => setUploaderName(e.target.value)}
-        />
-        <Select
-          value={selectedLanguage} // Current selected language.
-          className={style.dropDown}
-          options={languages} // Options to choose from.
-          onChange={handleLanguageChange} // Handler for when the selection changes.
-          isSearchable={false} // Removes search function.
-        />
-      </div>
-      <div className={style.formFooter}>
-        <label>
-          <input
-            type="checkbox"
-            checked={isForHearingImpaired}
-            onChange={(e) => setIsForHearingImpaired(e.target.checked)}
-          />
-          For Hearing Impaired
-        </label>
 
+      <input
+        type="text"
+        placeholder="Username"
+        className={style.uploaderName}
+        value={uploaderName}
+        onChange={(e) => setUploaderName(e.target.value)}
+      />
+      <Select
+        value={selectedLanguage} // Current selected language.
+        className={style.dropDown}
+        options={languages} // Options to choose from.
+        onChange={handleLanguageChange} // Handler for when the selection changes.
+        isSearchable={false} // Removes search function.
+      />
+      <label>
         <input
-          type="file"
-          accept=".srt"
-          onChange={(e) => setSubtitleFile(e.target.files![0])}
+          type="checkbox"
+          checked={isForHearingImpaired}
+          onChange={(e) => setIsForHearingImpaired(e.target.checked)}
         />
-      </div>
-      <hr />
+        For Hearing Impaired
+      </label>
+
+      <input
+        type="file"
+        accept=".srt"
+        onChange={(e) => setSubtitleFile(e.target.files![0])}
+      />
       <div className={style.buttonContainer}>
         <button type="submit" className={style.upload}>
           Upload

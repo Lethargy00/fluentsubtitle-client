@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { usePerformSearch } from "../../api/search";
 import Select from "react-select";
 import styles from "./SearchBar.module.css";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
@@ -61,6 +60,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         className={styles.searchInput} // CSS class for styling.
         value={searchQuery}
         onChange={handleSearchQueryChange}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            handleSearch();
+          }
+        }} // Handler for when the enter key is pressed.
       />
       {/* Icon for the search input. */}
       <button onClick={handleSearch} className={styles.searchIcon}>

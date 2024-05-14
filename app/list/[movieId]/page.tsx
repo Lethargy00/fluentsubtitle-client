@@ -45,10 +45,13 @@ export default function MovieDetailsPage({
       <div className={style.container}>
         <img src={imageUrl} alt={movieData.title} className={style.image} />
         <div className={style.description}>
-          <h1 className={style.title}>
-            {movieData.title} ({movieData.release_date})
+          <h1 className={style.titleContainer}>
+            <span className={style.title}>{movieData.title}</span>{" "}
+            <span className={style.releaseDate}>
+              ({movieData.release_date})
+            </span>
           </h1>
-          <p>{movieData.overview}</p>
+          <p className={style.overview}>{movieData.overview}</p>
         </div>
       </div>
 

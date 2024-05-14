@@ -29,3 +29,9 @@
 .text:hover {
   color: var(--color-bg);
 }
+
+@media (max-width: 495px) {
+  .text {
+    display: none;
+  }
+}

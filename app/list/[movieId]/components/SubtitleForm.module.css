@@ -1,6 +1,12 @@
 .formContainer {
   display: flex;
+  position: absolute;
   flex-direction: column;
+  gap: 15px;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  z-index: 1000;
   padding: 15px;
   border-radius: 15px;
   background-color: var(--color-alt-bg);
@@ -11,14 +17,9 @@
   justify-self: center;
   font-size: 25px;
 }
-
-.formHeader {
-  display: flex;
-  justify-content: space-between;
-}
-
 .uploaderName {
   padding: 15px;
+  border-radius: 15px;
   background-color: var(--color-bg);
 }
 

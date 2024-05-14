@@ -39,7 +39,7 @@ const getLanguageInfo = (languageCode: string) => {
 
 const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
-  const [showSubtitleForm, setShowSubtitleForm] = useState(false);
+  const [showSubtitleForm, setShowSubtitleForm] = useState(true);
 
   useEffect(() => {
     console.log("meow");
@@ -73,6 +73,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
     );
     setSubtitles(updatedSubtitles);
   };
+
   return (
     <div className={style.container}>
       <button

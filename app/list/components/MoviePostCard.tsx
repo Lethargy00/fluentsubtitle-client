@@ -30,7 +30,11 @@ const MovieDetails: React.FC<{ movies: Movie[] }> = ({ movies }) => {
           imageUrl = "https://placehold.co/400x600?text=No+Photo&font=roboto";
         }
 
-        const releaseYear = movie.release_date.slice(0, 4);
+        const releaseYear =
+          movie.release_date.slice(0, 4) === ""
+            ? "Unknown"
+            : movie.release_date.slice(0, 4);
+
         return (
           <div className={styles.container}>
             <img src={imageUrl} alt={movie.title} />

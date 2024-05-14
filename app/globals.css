@@ -42,6 +42,7 @@ main {
 
 .buttonContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   margin-top: 15px;
 }

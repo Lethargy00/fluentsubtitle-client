@@ -5,10 +5,14 @@
 }
 
 .description {
+  flex-grow: 1;
+  max-width: 80%;
   margin: 15px;
 }
 
-.title {
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
   font-size: 35px;
 }
 
@@ -16,4 +20,37 @@
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   height: 200px;
+}
+
+@media (max-width: 870px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+  }
+  .titleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 20px;
+    background-color: var(--color-alt-bg);
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .overview {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--color-alt-bg);
+  }
+  .image {
+    border-radius: 15px;
+    width: 200px;
+    height: auto;
+  }
 }
