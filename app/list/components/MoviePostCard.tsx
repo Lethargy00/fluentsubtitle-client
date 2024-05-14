@@ -25,7 +25,7 @@ const MovieDetails: React.FC<{ movies: Movie[] }> = ({ movies }) => {
             : movie.release_date.slice(0, 4);
 
         return (
-          <div className={style.container}>
+          <div key={movie.id} className={style.container}>
             <img src={imageUrl} alt={movie.title} />
             <div>
               <div className={style.movieTitle}>

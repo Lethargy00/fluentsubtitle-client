@@ -42,7 +42,6 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
   const [showSubtitleForm, setShowSubtitleForm] = useState(false);
 
   useEffect(() => {
-    console.log("meow");
     const fetchSubtitles = async () => {
       const db = await openDB("subtitlesDB", 1, {
         upgrade(db) {
