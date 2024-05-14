@@ -47,7 +47,6 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
           subtitleFileSize: subtitleFile.size,
           subtitleFileType: fileExtension || "",
         };
-        await addSubtitle(movieId, subtitleData); // Use the addSubtitle function
 
         addSubtitleHandler(subtitleData);
 

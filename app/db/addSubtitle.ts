@@ -7,7 +7,6 @@ export const addSubtitle = async (movieId: string, newSubtitle: Subtitle) => {
     const transaction = db.transaction("subtitles", "readwrite");
     const objectStore = transaction.objectStore("subtitles");
     const storedSubtitles = await objectStore.get(movieId);
-
     if (storedSubtitles) {
       storedSubtitles.subtitles.push(newSubtitle);
       await objectStore.put(storedSubtitles);

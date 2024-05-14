@@ -74,6 +74,10 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
     setSubtitles(updatedSubtitles);
   };
 
+  const subtitleContainerClass = showSubtitleForm
+    ? `${style.subtitleContainer} ${style.dimmed}`
+    : style.subtitleContainer;
+
   return (
     <div className={style.container}>
       <button
@@ -91,7 +95,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
           />
         )}
       </div>
-      <div className={style.subtitleContainer}>
+      <div className={subtitleContainerClass}>
         {subtitles.map((subtitle, index) => (
           <div key={index} className={style.individualContainer}>
             <div>

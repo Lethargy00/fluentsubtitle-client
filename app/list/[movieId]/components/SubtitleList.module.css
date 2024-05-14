@@ -24,6 +24,11 @@
   gap: 15px;
 }
 
+.dimmed {
+  filter: brightness(50%);
+  pointer-events: none;
+}
+
 .subtitleContainer {
   overflow-x: auto;
   max-height: 350px;
