@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faXmark,
+  faDownload,
+  faCalendarAlt,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import style from "./SubtitleList.module.css";
 import { openDB } from "idb";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
@@ -36,7 +39,6 @@ const getLanguageInfo = (languageCode: string) => {
 
 const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
-  const [isFirstBoot, setIsFirstBoot] = useState(true);
   const [showSubtitleForm, setShowSubtitleForm] = useState(false);
 
   useEffect(() => {
@@ -72,8 +74,13 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
     setSubtitles(updatedSubtitles);
   };
   return (
-    <>
-      <button onClick={() => setShowSubtitleForm(true)}>Add Subtitle</button>
+    <div className={style.container}>
+      <button
+        onClick={() => setShowSubtitleForm(true)}
+        className={style.addButton}
+      >
+        <FontAwesomeIcon icon={faPlus} />
+      </button>
       <div className={style.formContainer}>
         {showSubtitleForm && (
           <SubtitleForm
@@ -83,7 +90,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
           />
         )}
       </div>
-      <div className={style.container}>
+      <div className={style.subtitleContainer}>
         {subtitles.map((subtitle, index) => (
           <div key={index} className={style.individualContainer}>
             <div>
@@ -98,7 +105,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
                 className={style.delete}
                 onClick={() => deleteSubtitleHandler(subtitle.id)}
               >
-                <FontAwesomeIcon icon={faTrashAlt} />
+                <FontAwesomeIcon icon={faXmark} />
               </span>
             </div>
             <div>
@@ -113,7 +120,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 export default SubtitleList;

@@ -3,6 +3,7 @@ import Select from "react-select";
 import { languages } from "@/app/constants/languages";
 import { Subtitle } from "@/app/interfaces/subtitle";
 import { addSubtitle } from "@/app/db/addSubtitle";
+import style from "./SubtitleForm.module.css";
 
 interface SubtitleFormProps {
   onFormClose: () => void;
@@ -15,7 +16,7 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
   movieId,
   addSubtitleHandler,
 }) => {
-  const [uploaderName, setUploaderName] = useState("Unknown");
+  const [uploaderName, setUploaderName] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [isForHearingImpaired, setIsForHearingImpaired] = useState(false);
   const [subtitleFile, setSubtitleFile] = useState<File | null>(null);
@@ -58,42 +59,51 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
       console.error("No subtitle file selected");
     }
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Uploader Name:
+    <form onSubmit={handleSubmit} className={style.formContainer}>
+      <h2 className={style.headerText}>Upload subtitle</h2>
+      <div className={style.formHeader}>
         <input
           type="text"
+          placeholder="Username"
+          className={style.uploaderName}
           value={uploaderName}
           onChange={(e) => setUploaderName(e.target.value)}
         />
-      </label>
-      <Select
-        value={selectedLanguage} // Current selected language.
-        options={languages} // Options to choose from.
-        onChange={handleLanguageChange} // Handler for when the selection changes.
-        isSearchable={false} // Removes search function.
-      />
-      <label>
-        For Hearing Impaired:
-        <input
-          type="checkbox"
-          checked={isForHearingImpaired}
-          onChange={(e) => setIsForHearingImpaired(e.target.checked)}
+        <Select
+          value={selectedLanguage} // Current selected language.
+          className={style.dropDown}
+          options={languages} // Options to choose from.
+          onChange={handleLanguageChange} // Handler for when the selection changes.
+          isSearchable={false} // Removes search function.
         />
-      </label>
-      <label>
-        Subtitle File:
+      </div>
+      <div className={style.formFooter}>
+        <label>
+          <input
+            type="checkbox"
+            checked={isForHearingImpaired}
+            onChange={(e) => setIsForHearingImpaired(e.target.checked)}
+          />
+          For Hearing Impaired
+        </label>
+
         <input
           type="file"
           accept=".srt"
           onChange={(e) => setSubtitleFile(e.target.files![0])}
         />
-      </label>
-      <button type="submit">Upload Subtitle</button>
-      <button type="button" onClick={onFormClose}>
-        Cancel
-      </button>
+      </div>
+      <hr />
+      <div className={style.buttonContainer}>
+        <button type="submit" className={style.upload}>
+          Upload
+        </button>
+        <button type="button" onClick={onFormClose}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };

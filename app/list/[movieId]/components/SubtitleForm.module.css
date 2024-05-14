@@ -1,0 +1,86 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: var(--color-alt-bg);
+}
+
+.headerText {
+  text-align: center;
+  justify-self: center;
+  font-size: 25px;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.uploaderName {
+  padding: 15px;
+  background-color: var(--color-bg);
+}
+
+.uploaderName:focus {
+  outline: none;
+}
+
+.dropDown {
+  font-size: 30px;
+}
+
+.dropDown [class$="-control"] {
+  height: 100%;
+  background-color: var(--color-bg);
+  border: none;
+  border-radius: 15px 0px 0px 15px;
+}
+
+.dropDown [class$="-menu"] {
+  background-color: var(--color-bg);
+}
+
+.dropDown [class$="-value-container"] {
+  background-color: var(--color-alt-bg);
+}
+
+.dropDown [class$="-option"] {
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: var(--color-bg);
+}
+
+.dropDown [class$="-option"] > span {
+  border-radius: 5px;
+}
+
+.dropDown [class$="-option"]:hover {
+  background-color: var(--color-alt-bg);
+}
+
+.dropDown [class$="-singleValue"] > span {
+  border-radius: 5px;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.buttonContainer > button {
+  padding: 15px;
+  border-radius: 15px;
+  background-color: var(--color-bg);
+}
+.upload:hover {
+  color: var(--color-alt-text);
+  background-color: rgb(145, 207, 145);
+}

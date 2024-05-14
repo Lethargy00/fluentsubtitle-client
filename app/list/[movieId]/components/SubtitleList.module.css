@@ -1,13 +1,30 @@
-.formContainer {
+.addButton {
+  margin-left: auto;
+  margin-right: 15px;
+  padding: 8px;
+  border-radius: 8px;
   background-color: var(--color-alt-bg);
 }
 
+.addButton:hover {
+  color: var(--color-alt-text);
+  background-color: rgb(145, 207, 145);
+}
+
 .container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  gap: 15px;
+}
+
+.subtitleContainer {
   overflow-x: auto;
   max-height: 350px;
 }
 
 .individualContainer {
+  position: relative;
   padding: 15px;
   border-radius: 15px;
   margin: 15px 45px 0px 45px;
@@ -17,6 +34,16 @@
 .individualContainer div {
   display: flex;
   justify-content: space-between;
+}
+
+.delete {
+  position: absolute;
+  background-color: red;
+  padding: 6px;
+  border-radius: 100%;
+  right: 0;
+  top: 0;
+  cursor: pointer;
 }
 
 .download:hover {
