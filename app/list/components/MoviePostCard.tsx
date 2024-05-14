@@ -35,18 +35,14 @@ const MovieDetails: React.FC<{ movies: Movie[] }> = ({ movies }) => {
                   </h2>
                 </Link>
                 <h2>
-                  {Math.round(movie.vote_average * 10) / 10} / 10{" "}
-                  <FontAwesomeIcon icon={faStar} className={style.star} />{" "}
+                  <span className={style.starRating}>
+                    {Math.round(movie.vote_average * 10) / 10} / 10{" "}
+                    <FontAwesomeIcon icon={faStar} className={style.star} />{" "}
+                  </span>
                   <FontAwesomeIcon icon={faHeart} className={style.heart} />
                 </h2>
               </div>
               <p className={style.text}>{movie.overview}</p>
-              <div className={style.downloadCount}>
-                <p>
-                  25.980
-                  <FontAwesomeIcon icon={faDownload} />
-                </p>
-              </div>
             </div>
           </div>
         );

@@ -6,7 +6,6 @@
 
 .description {
   flex-grow: 1;
-  max-width: 80%;
   margin: 15px;
 }
 
@@ -17,9 +16,9 @@
 }
 
 .image {
+  height: 200px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  height: 200px;
 }
 
 @media (max-width: 870px) {

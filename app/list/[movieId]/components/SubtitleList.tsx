@@ -8,6 +8,7 @@ import {
   faDownload,
   faCalendarAlt,
   faPlus,
+  faDeaf,
 } from "@fortawesome/free-solid-svg-icons";
 import { openDB } from "idb";
 import { languages } from "@/app/constants/languages";
@@ -80,6 +81,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
   return (
     <div className={style.container}>
       <button
+        title="add subtitle"
         onClick={() => setShowSubtitleForm(true)}
         className={style.addButton}
       >
@@ -106,6 +108,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </span>
               <span
+                title="delete subtitle"
                 className={style.delete}
                 onClick={() => deleteSubtitleHandler(subtitle.id)}
               >
@@ -115,6 +118,14 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
             <div>
               <span>
                 {getLanguageInfo(subtitle.language).flag}{" "}
+                {subtitle.isForHearingImpaired && (
+                  <span
+                    title="Is for hearing impaired"
+                    className={style.hearingImpaired}
+                  >
+                    <FontAwesomeIcon icon={faDeaf} />
+                  </span>
+                )}
                 {getLanguageInfo(subtitle.language).label}
               </span>
               <span className={style.download}>
