@@ -1,18 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import SubtitleList from "./components/SubtitleList";
-import { useFetchMovie } from "@/app/api/fetchMovie";
-import style from "./page.module.css";
-import SubtitleForm from "./components/SubtitleForm";
 
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string | null;
-  overview: string;
-  release_date: string;
-  vote_average: number;
-}
+import SubtitleList from "./components/SubtitleList";
+import style from "./page.module.css";
+import React, { useEffect, useState } from "react";
+import { useFetchMovie } from "@/app/api/fetchMovie";
+import { Movie } from "@/app/interfaces/movie";
 
 export default function MovieDetailsPage({
   params,

@@ -1,14 +1,12 @@
-// "use client" directive indicates that this component should be treated as a Client Component in Next.js.
 "use client";
 
-// Importing necessary React hooks and components.
+import Select from "react-select";
+import style from "./SearchBar.module.css";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Select from "react-select";
-import styles from "./SearchBar.module.css";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { languages } from "@/app/constants/languages";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -42,13 +40,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   // Rendering the SearchBar component.
   return (
-    <div className={styles.searchBar}>
+    <div className={style.searchBar}>
       {/* Select component for choosing a language. */}
       <Select
         value={selectedLanguage} // Current selected language.
         options={languages} // Options to choose from.
         onChange={handleLanguageChange} // Handler for when the selection changes.
-        className={styles.dropDown} // CSS class for styling.
+        className={style.dropDown} // CSS class for styling.
         isSearchable={false} // Removes search function.
         components={customComponents} // Override the DropdownIndicator to remove the arrow.
       />
@@ -57,7 +55,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       <input
         type="text"
         placeholder="Search..."
-        className={styles.searchInput} // CSS class for styling.
+        className={style.searchInput} // CSS class for styling.
         value={searchQuery}
         onChange={handleSearchQueryChange}
         onKeyPress={(e) => {
@@ -67,7 +65,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         }} // Handler for when the enter key is pressed.
       />
       {/* Icon for the search input. */}
-      <button onClick={handleSearch} className={styles.searchIcon}>
+      <button onClick={handleSearch} className={style.searchIcon}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
     </div>

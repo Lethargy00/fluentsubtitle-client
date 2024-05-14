@@ -1,9 +1,9 @@
-import { useState } from "react";
 import Select from "react-select";
+import style from "./SubtitleForm.module.css";
 import { languages } from "@/app/constants/languages";
 import { Subtitle } from "@/app/interfaces/subtitle";
 import { addSubtitle } from "@/app/db/addSubtitle";
-import style from "./SubtitleForm.module.css";
+import { useState } from "react";
 
 interface SubtitleFormProps {
   onFormClose: () => void;

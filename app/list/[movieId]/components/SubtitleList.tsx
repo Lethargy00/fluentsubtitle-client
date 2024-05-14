@@ -1,3 +1,5 @@
+import style from "./SubtitleList.module.css";
+import SubtitleForm from "./SubtitleForm";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,14 +9,12 @@ import {
   faCalendarAlt,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import style from "./SubtitleList.module.css";
 import { openDB } from "idb";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { languages } from "@/app/constants/languages";
 import { Subtitle } from "@/app/interfaces/subtitle";
 import { addSubtitle } from "@/app/db/addSubtitle";
 import { deleteSubtitle } from "@/app/db/deleteSubtitle";
-import SubtitleForm from "./SubtitleForm";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 interface SubtitleListProps {
   movieId: string;
@@ -39,7 +39,7 @@ const getLanguageInfo = (languageCode: string) => {
 
 const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
-  const [showSubtitleForm, setShowSubtitleForm] = useState(true);
+  const [showSubtitleForm, setShowSubtitleForm] = useState(false);
 
   useEffect(() => {
     console.log("meow");

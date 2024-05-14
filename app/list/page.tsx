@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import MovieDetails from "./components/MoviePostCard";
 import SearchBar from "./components/SearchBar";
 import style from "./page.module.css";
+import { useEffect, useState } from "react";
 import { usePerformSearch } from "../api/search";
 
 export default function Home() {
