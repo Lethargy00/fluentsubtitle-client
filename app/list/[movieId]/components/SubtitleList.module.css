@@ -2,13 +2,18 @@
   margin-left: auto;
   margin-right: 15px;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: 100%;
   background-color: var(--color-alt-bg);
 }
 
 .addButton:hover {
   color: var(--color-alt-text);
   background-color: rgb(145, 207, 145);
+}
+
+.addButton > svg {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .container {
@@ -38,12 +43,21 @@
 
 .delete {
   position: absolute;
-  background-color: red;
-  padding: 6px;
+  background-color: rgb(233, 113, 113);
+  padding: 5px;
   border-radius: 100%;
-  right: 0;
-  top: 0;
+  right: -10px;
+  top: -15px;
   cursor: pointer;
+}
+
+.delete:hover {
+  background-color: rgb(231, 87, 87);
+}
+
+.delete > svg {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .download:hover {
