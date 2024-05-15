@@ -2,6 +2,7 @@
   display: flex;
   position: absolute;
   flex-direction: column;
+  justify-content: start;
   gap: 15px;
   top: 0;
   width: 100%;
@@ -63,6 +64,14 @@
   border-radius: 5px;
 }
 
+.dropDown [class$="-Svg"] {
+  color: var(--color-text);
+}
+
+.dropDown [class$="-indicatorSeparator"] {
+  background-color: var(--color-text);
+}
+
 .formFooter {
   display: flex;
   justify-content: space-between;
@@ -83,4 +92,9 @@
 .upload:hover {
   color: var(--color-alt-text);
   background-color: rgb(145, 207, 145);
+}
+
+.error {
+  color: rgb(240, 92, 92);
+  font-weight: bold;
 }
