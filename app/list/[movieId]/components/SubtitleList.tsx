@@ -44,16 +44,20 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
 
   useEffect(() => {
     const fetchSubtitles = async () => {
-      const db = await openDB("subtitlesDB", 1, {
-        upgrade(db) {
-          if (!db.objectStoreNames.contains("subtitles")) {
-            db.createObjectStore("subtitles", { keyPath: "id" });
-          }
-        },
-      });
-      const storedSubtitles = await db.get("subtitles", movieId);
-      if (storedSubtitles) {
-        setSubtitles(storedSubtitles.subtitles);
+      try {
+        const db = await openDB("subtitlesDB", 1, {
+          upgrade(db) {
+            if (!db.objectStoreNames.contains("subtitles")) {
+              db.createObjectStore("subtitles", { keyPath: "id" });
+            }
+          },
+        });
+        const storedSubtitles = await db.get("subtitles", movieId);
+        if (storedSubtitles) {
+          setSubtitles(storedSubtitles.subtitles);
+        }
+      } catch (error) {
+        console.error("Error fetching subtitles:", error);
       }
     };
 
@@ -61,17 +65,25 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
   }, [movieId]);
 
   const addSubtitleHandler = async (newSubtitle: Subtitle) => {
-    await addSubtitle(movieId, newSubtitle);
-    const updatedSubtitles = [...subtitles, newSubtitle];
-    setSubtitles(updatedSubtitles);
+    try {
+      await addSubtitle(movieId, newSubtitle);
+      const updatedSubtitles = [...subtitles, newSubtitle];
+      setSubtitles(updatedSubtitles);
+    } catch (error) {
+      console.error("Error adding subtitle:", error);
+    }
   };
 
   const deleteSubtitleHandler = async (subtitleId: string) => {
-    await deleteSubtitle(movieId, subtitleId);
-    const updatedSubtitles = subtitles.filter(
-      (subtitle) => subtitle.id !== subtitleId
-    );
-    setSubtitles(updatedSubtitles);
+    try {
+      await deleteSubtitle(movieId, subtitleId);
+      const updatedSubtitles = subtitles.filter(
+        (subtitle) => subtitle.id !== subtitleId
+      );
+      setSubtitles(updatedSubtitles);
+    } catch (error) {
+      console.error("Error deleting subtitle:", error);
+    }
   };
 
   const subtitleContainerClass = showSubtitleForm
@@ -81,9 +93,10 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
   return (
     <div className={style.container}>
       <button
-        title="add subtitle"
+        title="Add subtitle"
         onClick={() => setShowSubtitleForm(true)}
         className={style.addButton}
+        aria-label="Add Subtitle"
       >
         <FontAwesomeIcon icon={faPlus} />
       </button>
@@ -100,17 +113,18 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
         {subtitles.map((subtitle, index) => (
           <div key={index} className={style.individualContainer}>
             <div>
-              <span>
+              <span aria-label="Username">
                 <FontAwesomeIcon icon={faUser} /> {subtitle.uploaderName}
               </span>
-              <span>
+              <span aria-label="Upload date">
                 {subtitle.uploadedDate.slice(0, 10)}{" "}
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </span>
               <span
-                title="delete subtitle"
+                title="Delete subtitle"
                 className={style.delete}
                 onClick={() => deleteSubtitleHandler(subtitle.id)}
+                aria-label="Delete subtitle"
               >
                 <FontAwesomeIcon icon={faXmark} />
               </span>
@@ -122,13 +136,14 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
                   <span
                     title="Is for hearing impaired"
                     className={style.hearingImpaired}
+                    aria-label="Is for hearing impaired"
                   >
                     <FontAwesomeIcon icon={faDeaf} />
                   </span>
                 )}
                 {getLanguageInfo(subtitle.language).label}
               </span>
-              <span className={style.download}>
+              <span className={style.download} aria-label="Total downloads">
                 0 <FontAwesomeIcon icon={faDownload} />
               </span>
             </div>
