@@ -1,3 +1,4 @@
+// Import necessary modules and components.
 import style from "./SubtitleList.module.css";
 import SubtitleForm from "./SubtitleForm";
 import React, { useEffect, useState } from "react";
@@ -17,10 +18,12 @@ import { addSubtitle } from "@/app/db/addSubtitle";
 import { deleteSubtitle } from "@/app/db/deleteSubtitle";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
+// Define the props interface for SubtitleList component.
 interface SubtitleListProps {
   movieId: string;
 }
 
+// Function to get language info based on language code.
 const getLanguageInfo = (languageCode: string) => {
   const language = languages.find((lang) => lang.value === languageCode);
   if (language) {
@@ -38,10 +41,13 @@ const getLanguageInfo = (languageCode: string) => {
   }
 };
 
+// SubtitleList component.
 const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
+  // State variables.
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
   const [showSubtitleForm, setShowSubtitleForm] = useState(false);
 
+  // Fetch subtitles from IndexedDB when component mounts.
   useEffect(() => {
     const fetchSubtitles = async () => {
       try {
@@ -64,6 +70,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
     fetchSubtitles();
   }, [movieId]);
 
+  // Handler for adding a new subtitle.
   const addSubtitleHandler = async (newSubtitle: Subtitle) => {
     try {
       await addSubtitle(movieId, newSubtitle);
@@ -74,6 +81,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
     }
   };
 
+  // Handler for deleting a subtitle.
   const deleteSubtitleHandler = async (subtitleId: string) => {
     try {
       await deleteSubtitle(movieId, subtitleId);
@@ -86,10 +94,12 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
     }
   };
 
+  // Calculate class for subtitle container based on showSubtitleForm state.
   const subtitleContainerClass = showSubtitleForm
     ? `${style.subtitleContainer} ${style.dimmed}`
     : style.subtitleContainer;
 
+  // Render the component.
   return (
     <div className={style.container}>
       <button
