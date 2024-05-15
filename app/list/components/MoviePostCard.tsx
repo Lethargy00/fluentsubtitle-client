@@ -3,22 +3,26 @@ import React from "react";
 import style from "./MoviePostCard.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faHeart, faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Movie } from "@/app/interfaces/movie";
 
-// MovieDetails component that takes an array of movie objects and returns a list of movies.
+// MovieDetails component to display movie details.
 const MovieDetails: React.FC<{ movies: Movie[] }> = ({ movies }) => {
+  // If no movies are found, display a loading message.
   if (movies.length === 0) return <div>Waiting for search / Loading...</div>;
 
   return (
     <>
       {movies.map((movie: Movie) => {
+        // Construct the image URL using the movie's poster path.
         let imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
+        // If the movie has no poster, use a placeholder image.
         if (movie.poster_path === null) {
           imageUrl = "https://placehold.co/400x600?text=No+Photo&font=roboto";
         }
 
+        // Extract the release year from the movie's release date.
         const releaseYear =
           movie.release_date.slice(0, 4) === ""
             ? "Unknown"

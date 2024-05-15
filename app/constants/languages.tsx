@@ -1,7 +1,7 @@
 import { Language } from "../interfaces/language";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
-// Array of languages with their codes, labels, and emojis.
+// Array of languages with their codes, labels, and flags.
 export const languages: Language[] = [
   {
     value: "en",

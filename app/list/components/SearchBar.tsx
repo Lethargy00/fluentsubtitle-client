@@ -12,7 +12,7 @@ interface SearchBarProps {
   onSearch: (query: string) => void;
 }
 
-// SearchBar component definition.
+// SearchBar component
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   // useState hooks
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
@@ -28,14 +28,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     DropdownIndicator: () => null,
   };
 
+  // Handler function for when the search query changes.
   const handleSearchQueryChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSearchQuery(event.target.value);
+    setSearchQuery(event.target.value); // Update the search query.
   };
 
+  // Handler function for when the search button is clicked.
   const handleSearch = () => {
-    onSearch(searchQuery);
+    onSearch(searchQuery); // Calls the onSearch prop function with the search query.
   };
 
   // Rendering the SearchBar component.
@@ -60,9 +62,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onChange={handleSearchQueryChange}
         onKeyPress={(e) => {
           if (e.key === "Enter") {
-            handleSearch();
+            handleSearch(); // Calls the handleSearch function when the enter key is pressed.
           }
-        }} // Handler for when the enter key is pressed.
+        }}
       />
       {/* Icon for the search input. */}
       <button onClick={handleSearch} className={style.searchIcon}>
