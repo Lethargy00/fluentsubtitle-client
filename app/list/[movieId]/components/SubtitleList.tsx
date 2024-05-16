@@ -185,6 +185,10 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
                 <FontAwesomeIcon icon={faXmark} />
               </span>
             </div>
+            <div className={style.fileInfo}>
+              <span>{Math.round(subtitle.subtitleFileSize * 0.000125)} KB</span>
+              <span>.{subtitle.subtitleFileType.toLowerCase()}</span>
+            </div>
             <div>
               <span>
                 {getLanguageInfo(subtitle.language).flag}{" "}
@@ -199,6 +203,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
                 )}
                 {getLanguageInfo(subtitle.language).label}
               </span>
+
               <span
                 title="Download subtitle"
                 className={style.download}

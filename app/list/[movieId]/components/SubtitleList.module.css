@@ -67,6 +67,12 @@
   padding-right: 5px;
 }
 
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
 .download:hover {
   cursor: pointer;
   color: var(--color-bg);
