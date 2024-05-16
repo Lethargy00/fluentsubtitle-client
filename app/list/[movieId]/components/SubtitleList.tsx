@@ -186,7 +186,7 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
               </span>
             </div>
             <div className={style.fileInfo}>
-              <span>{Math.round(subtitle.subtitleFileSize * 0.000125)} KB</span>
+              <span>{Math.round(subtitle.subtitleFileSize * 0.001)} KB</span>
               <span>.{subtitle.subtitleFileType.toLowerCase()}</span>
             </div>
             <div>

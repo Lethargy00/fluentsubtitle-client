@@ -4,6 +4,7 @@ import style from "./SubtitleForm.module.css";
 import { languages } from "@/app/constants/languages";
 import { Subtitle } from "@/app/interfaces/subtitle";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // Define the props interface for the SubtitleForm component.
 interface SubtitleFormProps {
@@ -96,9 +97,11 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
             return;
           }
 
+          const subtitleId = `${uuidv4()}`;
+
           // Create a new subtitle object.
           const subtitleData: Subtitle = {
-            id: Date.now().toString(),
+            id: subtitleId,
             uploaderName: uploaderName,
             language: selectedLanguage.value,
             isForHearingImpaired: isForHearingImpaired,
