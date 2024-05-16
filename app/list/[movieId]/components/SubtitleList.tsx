@@ -94,6 +94,52 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
     }
   };
 
+  // Handler for downloading a subtitle.
+  const downloadSubtitleHandler = async (subtitleId: string) => {
+    try {
+      const db = await openDB("subtitlesDB", 1, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains("subtitles")) {
+            db.createObjectStore("subtitles", { keyPath: "id" });
+          }
+        },
+      });
+
+      // Retrieve the subtitle from IndexedDB.
+      const storedSubtitles = await db.get("subtitles", movieId);
+      if (storedSubtitles) {
+        const subtitle = storedSubtitles.subtitles.find(
+          (sub: Subtitle) => sub.id === subtitleId
+        );
+        if (subtitle) {
+          // Increment the download count.
+          subtitle.downloadCount++;
+
+          // Update the subtitle record in IndexedDB.
+          await db.put("subtitles", {
+            ...storedSubtitles,
+            subtitles: storedSubtitles.subtitles.map((sub: Subtitle) =>
+              sub.id === subtitleId ? subtitle : sub
+            ),
+          });
+
+          // Create a new Blob object from the subtitle file data.
+          const blob = new Blob([subtitle.subtitleFile], {
+            type: subtitle.subtitleFileType,
+          });
+
+          // Generate a download link for the subtitle file.
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = subtitle.subtitleFileName;
+          link.click();
+        }
+      }
+    } catch (error) {
+      console.error("Error downloading subtitle:", error);
+    }
+  };
+
   // Calculate class for subtitle container based on showSubtitleForm state.
   const subtitleContainerClass = showSubtitleForm
     ? `${style.subtitleContainer} ${style.dimmed}`
@@ -153,8 +199,13 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
                 )}
                 {getLanguageInfo(subtitle.language).label}
               </span>
-              <span className={style.download} aria-label="Total downloads">
-                0 <FontAwesomeIcon icon={faDownload} />
+              <span
+                title="Download subtitle"
+                className={style.download}
+                onClick={() => downloadSubtitleHandler(subtitle.id)}
+                aria-label="Download subtitle"
+              >
+                {subtitle.downloadCount} <FontAwesomeIcon icon={faDownload} />
               </span>
             </div>
           </div>

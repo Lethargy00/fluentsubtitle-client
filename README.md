@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Product Description
 
-This is just a concept site which shows an idea of what FluentSubtitle could look like as a final product. This demo has a little functionality which allows you to add and remove subtitles. But it only saves them inside indexedDB.
+This is just a concept site which shows an idea of what FluentSubtitle could look like as a final product. This demo has a little functionality which allows you to add, remove and download subtitles. But it only saves them inside indexedDB.
 
 ## Functional Requirements
 
@@ -38,11 +38,9 @@ This is just a concept site which shows an idea of what FluentSubtitle could loo
 - [x] Responsiveness on mobile devices.
 - [x] Add ability to search for movies.
 - [x] Create a form for adding subtitles.
-- [x] Ability to add subtitles to indexedDB. (only possible to upload info about subtitles not actual subtitles itself)
+- [x] Ability to add subtitles to indexedDB.
 - [x] Ability to show added subtitles for specified movie.
 - [x] Ability to remove subtitles from indexedDB
-
-NOTE TO SELF: I need to convert the subtitle file to base64 before uploading it to IndexedDB.
 
 # Analysis
 
@@ -54,8 +52,8 @@ Moreover it would be optimal to have pictures of the different languages instead
 
 # Analysis 2024-05-16
 
-Currently the software has a lot more functionality than before. Right now you can search for movies. Add, remove and list upp subtitles. The website is a lot more responsive than before as well it has a lot more accessibility features, this gives a lot better of an experience for most users.
+Currently the software has a lot more functionality than before. Right now you can search for movies. Add, remove, list upp and download subtitles. The website is a lot more responsive than before as well it has a lot more accessibility features, this gives a lot better of an experience for most users.
 </br></br>
-There are a lot of improvements that I still need to work for. For example, the possibility to upload the actual subtitle itself. This requires to convert the subtitle into base64 to be able to save it as a string. and then whenever it gets downloaded it converts back into the original srt format. Furthermore, I could always create an api which handles the subtitle upload and download. However, I'm mainly focusing on creating a client concept rather than a fully working client. Other improvements that could be made is a more clear feedback for the user. Whenever something is going wrong or something happens. For example, whenever a user goes to the subtitle list page. It will display Waiting for search / Loading... Which would be better if I instead only said one or the other depending on what state the program is in. Other Improvements are the file structure. Because I feel like it's not really the best way to structure up the website.
+I could always create an api which handles the subtitle upload and download. However, I'm mainly focusing on creating a client concept rather than a fully working client. Other improvements that could be made is a more clear feedback for the user. Whenever something is going wrong or something happens. For example, whenever a user goes to the subtitle list page. It will display Waiting for search / Loading... Which would be better if I instead only said one or the other depending on what state the program is in. Other Improvements are the file structure. Because I feel like it's not really the best way to structure up the website.
 </br></br>
-Something that I would need to work a little more on is fixing the next/Image loading for the movie posters. so that they can be loaded a lot faster than what they are currently. More features that I could fix for quality of life. Is to add a feature which automatically detects the user if it prefers dark or light mode. Currently the search bar's flag options still doesn't do anything. But I'm planning on fixing it whenever I've actually found a way to upload and download the srt files properly. (Note the idea of the feature is to only get the results of the selected language. Example, if you select English it will only give you results of english subtitles.)
+Something that I would need to work a little more on is fixing the next/Image loading for the movie posters. so that they can be loaded a lot faster than what they are currently. More features that I could fix for quality of life. Is to add a feature which automatically detects the user if it prefers dark or light mode. Currently the search bar's flag options still doesn't do anything. (Note the idea of the feature is to only get the results of the selected language. Example, if you select English it will only give you results of english subtitles )

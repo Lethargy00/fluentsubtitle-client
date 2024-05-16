@@ -4,6 +4,8 @@ export interface Subtitle {
   language: string;
   isForHearingImpaired: boolean;
   uploadedDate: string;
+  downloadCount: number;
+  subtitleFile: Blob;
   subtitleFileName: string;
   subtitleFileSize: number;
   subtitleFileType: string;

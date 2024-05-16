@@ -103,6 +103,8 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
             language: selectedLanguage.value,
             isForHearingImpaired: isForHearingImpaired,
             uploadedDate: new Date().toISOString(),
+            downloadCount: 0,
+            subtitleFile: subtitleFile,
             subtitleFileName: subtitleFile.name,
             subtitleFileSize: subtitleFile.size,
             subtitleFileType: fileExtension || "",

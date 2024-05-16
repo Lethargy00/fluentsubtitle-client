@@ -16,8 +16,6 @@
 - [x] Responsiveness on mobile devices.
 - [x] Add ability to search for movies.
 - [x] Create a form for adding subtitles.
-- [x] Ability to add subtitles to indexedDB. (only possible to upload info about subtitles not actual subtitles itself)
+- [x] Ability to add subtitles to indexedDB.
 - [x] Ability to show added subtitles for specified movie.
 - [x] Ability to remove subtitles from indexedDB
-
-NOTE TO SELF: I need to convert the subtitle file to base64 before uploading it to IndexedDB.
