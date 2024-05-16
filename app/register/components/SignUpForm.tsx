@@ -24,7 +24,10 @@ const SignUpForm = () => {
           <input type="password" placeholder="Confirm Password" required />
         </div>
         <div className="flex gap-2">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            aria-label="Checkbox for remembering login info"
+          />
           <p>Remember me</p>
         </div>
         <div className={style.buttonContainer}>

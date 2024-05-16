@@ -42,9 +42,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   // Rendering the SearchBar component.
   return (
-    <div className={style.searchBar}>
+    <form className={style.searchBar} aria-label="Search for movie form">
       {/* Select component for choosing a language. */}
       <Select
+        aria-label="Select language"
         value={selectedLanguage} // Current selected language.
         options={languages} // Options to choose from.
         onChange={handleLanguageChange} // Handler for when the selection changes.
@@ -57,6 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       <input
         type="text"
         placeholder="Search..."
+        aria-label="Search input for movie"
         className={style.searchInput} // CSS class for styling.
         value={searchQuery}
         onChange={handleSearchQueryChange}
@@ -67,10 +69,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         }}
       />
       {/* Icon for the search input. */}
-      <button onClick={handleSearch} className={style.searchIcon}>
+      <button
+        onClick={handleSearch}
+        className={style.searchIcon}
+        aria-label="Start search"
+      >
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-    </div>
+    </form>
   );
 };
 

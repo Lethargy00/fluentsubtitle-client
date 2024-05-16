@@ -176,14 +176,14 @@ const SubtitleList: React.FC<SubtitleListProps> = ({ movieId }) => {
                 {subtitle.uploadedDate.slice(0, 10)}{" "}
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </span>
-              <span
+              <button
                 title="Delete subtitle"
                 className={style.delete}
                 onClick={() => deleteSubtitleHandler(subtitle.id)}
                 aria-label="Delete subtitle"
               >
                 <FontAwesomeIcon icon={faXmark} />
-              </span>
+              </button>
             </div>
             <div className={style.fileInfo}>
               <span>{Math.round(subtitle.subtitleFileSize * 0.001)} KB</span>
