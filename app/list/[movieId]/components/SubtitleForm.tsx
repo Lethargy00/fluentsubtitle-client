@@ -97,6 +97,7 @@ const SubtitleForm: React.FC<SubtitleFormProps> = ({
             return;
           }
 
+          // Generate unique id using uuid.
           const subtitleId = `${uuidv4()}`;
 
           // Create a new subtitle object.
