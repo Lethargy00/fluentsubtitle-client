@@ -1,5 +1,3 @@
-"use client";
-
 import Select from "react-select";
 import style from "./SearchBar.module.css";
 import React, { useState } from "react";
@@ -42,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   // Rendering the SearchBar component.
   return (
-    <form className={style.searchBar} aria-label="Search for movie form">
+    <div className={style.searchBar} aria-label="Search for movie form">
       {/* Select component for choosing a language. */}
       <Select
         aria-label="Select language"
@@ -76,7 +74,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       >
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-    </form>
+    </div>
   );
 };
 

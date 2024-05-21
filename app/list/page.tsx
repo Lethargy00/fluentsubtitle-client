@@ -18,7 +18,7 @@ export default function Home() {
   // Perform the initial search when the component mounts.
   useEffect(() => {
     performSearch();
-  }, [searchQuery]);
+  }, [performSearch, searchQuery]);
 
   // Render the page.
   return (
